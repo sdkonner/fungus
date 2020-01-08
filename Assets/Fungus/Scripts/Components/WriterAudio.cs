@@ -53,8 +53,23 @@ namespace Fungus
         // True when a voiceover clip is playing
         protected bool playingVoiceover = false;
 
+        public bool IsPlayingVoiceOver { get { return playingVoiceover; } }
+
         // Time when current beep will have finished playing
         protected float nextBeepTime;
+
+
+        public float GetSecondsRemaining()
+        {
+            if (IsPlayingVoiceOver)
+            {
+                return targetAudioSource.clip.length - targetAudioSource.time;
+            }
+            else
+            {
+                return 0F;
+            }
+        }
 
         protected virtual void SetAudioMode(AudioMode mode)
         {
@@ -213,7 +228,7 @@ namespace Fungus
                 {
                     if (nextBeepTime < Time.realtimeSinceStartup)
                     {
-                        targetAudioSource.clip = beepSounds[Random.Range(0, beepSounds.Count - 1)];
+                        targetAudioSource.clip = beepSounds[Random.Range(0, beepSounds.Count)];
 
                         if (targetAudioSource.clip != null)
                         {

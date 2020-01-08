@@ -12,7 +12,7 @@ namespace Fungus
     [CommandInfo("Scripting",
                  "Open URL",
                  "Opens the specified URL in the browser.")]
-    public class LinkToWebsite : Command
+    public class OpenURL : Command
     {
         [Tooltip("URL to open in the browser")]
         [SerializeField] protected StringData url = new StringData();
@@ -34,6 +34,11 @@ namespace Fungus
         public override Color GetButtonColor()
         {
             return new Color32(235, 191, 217, 255);
+        }
+
+        public override bool HasReference(Variable variable)
+        {
+            return url.stringRef == variable || base.HasReference(variable);
         }
 
         #endregion

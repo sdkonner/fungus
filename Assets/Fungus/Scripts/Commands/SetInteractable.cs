@@ -12,7 +12,7 @@ namespace Fungus
     /// </summary>
     [CommandInfo("UI", 
                  "Set Interactable", 
-                 "Set the interactable sate of selectable objects.")]
+                 "Set the interactable state of selectable objects.")]
     public class SetInteractable : Command 
     {
         [Tooltip("List of objects to be affected by the command")]
@@ -99,6 +99,11 @@ namespace Fungus
             }
 
             return false;
+        }
+
+        public override bool HasReference(Variable variable)
+        {
+            return interactableState.booleanRef == variable || base.HasReference(variable);
         }
 
         #endregion

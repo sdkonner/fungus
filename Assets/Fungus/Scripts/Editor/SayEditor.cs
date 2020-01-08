@@ -81,11 +81,11 @@ namespace Fungus.EditorUtils
         protected SerializedProperty waitForClickProp;
         protected SerializedProperty stopVoiceoverProp;
         protected SerializedProperty setSayDialogProp;
+        protected SerializedProperty waitForVOProp;
 
-        protected virtual void OnEnable()
+        public override void OnEnable()
         {
-            if (NullTargetCheck()) // Check for an orphaned editor instance
-                return;
+            base.OnEnable();
 
             characterProp = serializedObject.FindProperty("character");
             portraitProp = serializedObject.FindProperty("portrait");
@@ -99,6 +99,7 @@ namespace Fungus.EditorUtils
             waitForClickProp = serializedObject.FindProperty("waitForClick");
             stopVoiceoverProp = serializedObject.FindProperty("stopVoiceover");
             setSayDialogProp = serializedObject.FindProperty("setSayDialog");
+            waitForVOProp = serializedObject.FindProperty("waitForVO");
 
             if (blackTex == null)
             {
@@ -197,7 +198,8 @@ namespace Fungus.EditorUtils
             EditorGUILayout.PropertyField(waitForClickProp);
             EditorGUILayout.PropertyField(stopVoiceoverProp);
             EditorGUILayout.PropertyField(setSayDialogProp);
-
+            EditorGUILayout.PropertyField(waitForVOProp);
+            
             if (showPortraits && t.Portrait != null)
             {
                 Texture2D characterTexture = t.Portrait.texture;

@@ -99,12 +99,12 @@ namespace Fungus
 
             if (!waitUntilFinished)
             {
-                StartCoroutine(writer.Write(newText, clearText, false, true, null, null));
+                StartCoroutine(writer.Write(newText, clearText, false, true, false, null, null));
                 Continue();
             }
             else
             {
-                StartCoroutine(writer.Write(newText, clearText, false, true, null,
+                StartCoroutine(writer.Write(newText, clearText, false, true, false, null,
                              () => { Continue (); }
                 ));
             }
@@ -153,6 +153,11 @@ namespace Fungus
         {
             // String id for Write commands is WRITE.<Localization Id>.<Command id>
             return "WRITE." + GetFlowchartLocalizationId() + "." + itemId;
+        }
+
+        public override bool HasReference(Variable variable)
+        {
+            return text.stringRef == variable || setAlpha.floatRef == variable || setColor.colorRef == variable || base.HasReference(variable);
         }
 
         #endregion
